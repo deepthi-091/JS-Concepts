@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API</title>
+    <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    form { display: flex; flex-direction: column; gap: 0.5em; width: 250px; }
+    .success { color: green; }
+    .error { color: red; }
+    .orders { margin-top: 20px; }
+  </style>
+</head>
+<body>
+    <h2>Shooping Order Flow</h2>
+    <form id="form-data">
+        <label>Name: <input type="text" id="name" name="name" required></label>
+        <label>Item: <select name="item" id="item" required>
+            <option value="banana">Bananas</option>
+            <option value="apple">Apples</option>
+            <option value="orange">Oranges</option>
+        </select></label>
+        <button type="submit">Submit Order</button>
+    </form>
+    <button id="check-btn">Check Availability</button>
+    <p id="message"></p>
+
+    <div class="orders">
+        <h3>API Database(Mock)</h3>
+        <pre id="dbview">[]</pre>
+        <h3>Stock Levels</h3>
+        <pre id="stockView"></pre>
+    </div>
+    <script>
+        const apiDatabase=[];
+        const stock = {
+            Apples:10,
+            Bananas:30,
+            Oranges:20
+        };
+        const form=document.getElementById("form-data");
+        const message=document.getElementById("message");
+        const dbview=document.getElementById("dbview");
+        const stockview=document.getElementById("stockView");
+        function updateStockView(){
+            stockview.textContent=JSON.stringify(stock,null,2);
+        }
+        updateStockView();
+        function apiPostOrder(order){
+            apiDatabase.push(order);
+            return { status:"success", id: apiDatabase.length, order};
+        }
+        function apiGetOrders(){
+            return apiDatabase;
+        }
+        form.addEventListener("submit",(e)=>{
+            e.preventDefault();
+            const formdata=new FormData(form);
+            for (let [key, value] of formdata.entries()) {
+      console.log("Entry:", key, value);
+    }
+            const name=formdata.get("name");
+            const item=formdata.get("item");
+
+            if(stock[item] > 0){
+                stock[item]--;
+                const order={name,item,orderDate:new Date().toISOString().split("T")[0]};
+                const respose=apiPostOrder(order);
+                message.textContent=`Order submitted! ${item} remaining: ${stock[item]}`;
+                message.className="success";
+
+                dbview.textContent=JSON.stringify(apiGetOrders(),null,2);
+                updateStockView();
+                form.reset();
+            }
+            else{
+                message.textContent=`Sorry, ${item} is out of stock.`;
+                message.className="error";
+            }
+
+        });
+        document.getElementById("check-btn").addEventListener("click",()=>{
+            const orders =apiGetOrders();
+            if(orders.length === 0){
+                message.textContent="No orders yet";
+                message.className="error";
+                return;
+            }
+            let availability="";
+            for(let item in stock){
+                availability += `${item}: ${stock[item]} left\n`;
+            }
+            message.textContent="current stock:\n"+availability;
+            message.className="success";
+        })
+
+    </script>
+</body>
+</html>

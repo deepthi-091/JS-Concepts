@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label>Email:</label>
+    <input type="email" id="email">
+    <button id="email-btn">check</button>
+    <p id="para"></p>
+    <script>
+       
+        const btn=document.getElementById("email-btn");
+        btn.addEventListener("click",(e)=>{
+            e.preventDefault();
+            const email=document.getElementById("email").value;
+            const regex=/[\w.-]+@[\w.-]+\.\w+$/;
+            if(regex.test(email)){
+                document.getElementById("para").textContent="validation correct";
+            }
+            else{
+                document.getElementById("para").textContent="please try again. invalid!"
+            }
+            document.getElementById("email").value="";
+        })
+    </script>
+</body>
+</html>

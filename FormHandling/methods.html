@@ -1,0 +1,55 @@
+<form id="signupForm">
+  <input type="text" name="username" value="Alice">
+  <input type="email" name="email" value="alice@example.com">
+  <input type="password" name="password" value="Secret123!">
+  <label><input type="checkbox" name="hobby" value="Reading" checked> Reading</label>
+  <label><input type="checkbox" name="hobby" value="Gaming" checked> Gaming</label>
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+  const form = document.getElementById("signupForm");
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+
+    // append
+    formData.append("role", "user");
+
+    // set (overwrite username)
+    formData.set("username", "Bob");
+
+    // get
+    console.log("Email:", formData.get("email"));
+
+    // getAll (multiple hobbies)
+    console.log("Hobbies:", formData.getAll("hobby"));
+
+    // has
+    console.log("Has password?", formData.has("password"));
+
+    // delete
+    formData.delete("password");
+
+    // forEach
+    formData.forEach((value, key) => {
+      console.log(key, "=", value);
+    });
+
+    // entries
+    for (let [key, value] of formData.entries()) {
+      console.log("Entry:", key, value);
+    }
+
+    // keys
+    for (let key of formData.keys()) {
+      console.log("Key:", key);
+    }
+
+    // values
+    for (let value of formData.values()) {
+      console.log("Value:", value);
+    }
+  });
+</script>

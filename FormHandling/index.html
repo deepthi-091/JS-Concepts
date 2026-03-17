@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <form id="form-data">
+        <label>Name:<input type="text" name="name" id="name"></label>
+        <label>Email: <input type="email" name="email" id="email"></label>
+        <label>Password:<input type="password" name="password" id="password"></label>
+        <button type="submit">submit</button>
+    </form>
+    <h3>stored data</h3>
+    <pre id="output"></pre>
+    <script>
+        const form=document.getElementById("form-data");
+        
+
+        form.addEventListener("submit",function(e){
+             e.preventDefault();
+            // const name=document.getElementById("name").value;
+            // const email=document.getElementById("email").value;
+            // const password=document.getElementById("password").value;
+            const formdata=new FormData(form);
+            const user={};
+            formdata.forEach((value,key)=>{
+                user[key]=value;
+            });
+            // const user={
+            //     name:name,
+            //     email:email,
+            //     password:password
+            // }
+            localStorage.setItem("userdata",JSON.stringify(user));
+            const output=document.getElementById("output");
+            output.textContent= JSON.stringify(user,null,2);
+            form.reset();
+        })
+        window.addEventListener("load",()=>{
+            const saveddata=localStorage.getItem("userdata");
+            if(saveddata){
+                output.textContent=saveddata;
+            }
+        })
+    </script>
+</body>
+</html>

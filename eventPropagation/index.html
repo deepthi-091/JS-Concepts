@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .grandparent {
+      width: 300px;
+      height: 300px;
+      background-color: lightblue;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .parent {
+      width: 200px;
+      height: 200px;
+      background-color: lightgreen;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .child {
+      width: 100px;
+      height: 100px;
+      background-color: lightcoral;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    .neighbour{
+        height: 100px;
+      background-color: rgb(128, 240, 143);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+    <div class="grandparent" id="grandparent">GrandParent
+        <div class="parent" id="parent">Parent
+            <div class="child" id="child">Child</div>
+        </div>
+    </div>
+    <div class="neighbour" id="neighbour"></div>
+    <script src="index.js">
+       
+    </script>
+    
+</body>
+</html>
