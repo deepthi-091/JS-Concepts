@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h2{
+            text-align: center;
+            background: linear-gradient(90deg, purple, blue , red);
+            background-clip: text;
+            color: transparent;
+            font-weight: 2rem;
+        }
+        ul li{
+            color: black;
+            list-style-type: square;
+        }
+        .error{
+            color: red;
+        }
+        .single-item{
+            display: inline;
+        }
+        #userid-item{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1em;
+            
+        }
+        button{
+            border: none;
+            border-radius: 1em;
+            color: white;
+            background: #1e90ff;
+            padding: 0.5em;
+        }
+    </style>
+</head>
+<body>
+    <h2>Posts</h2>
+    <label for="single-item">Search id: <input type="number" id="single-item" class="single-item"></label>
+    <span id="field-error" class="error"></span>
+    <button id="search-btn">search</button>
+    <p id="userid-item"></p>
+    
+    <form method="post">
+        <label for="title">Title: <input type="text" id="title" class="title"></label>
+        <label for="body">Body: <input type="text" id="body" class="body"></label>
+        <span id="form-error" class="error"></span>
+    </form>
+    <button id="add-btn">add item</button>
+
+    <ul id="posts"></ul>
+    <p id="post-error" class="error"></p>
+    <script src="api-1.js"></script>
+</body>
+</html>

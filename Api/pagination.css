@@ -1,0 +1,49 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+h2 {
+  text-align: center;
+  background: linear-gradient(90deg, purple, blue, red);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+ul {
+  padding: 0;
+}
+
+ul li {
+  list-style-type: square;
+  margin: 5px 0;
+  color: black;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}
+
+button {
+  border: none;
+  border-radius: 0.5em;
+  color: white;
+  background: #1e90ff;
+  padding: 0.5em 1em;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background: gray;
+  cursor: not-allowed;
+}
+
+.error {
+  color: red;
+  text-align: center;
+}
