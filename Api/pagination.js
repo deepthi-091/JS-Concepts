@@ -3,7 +3,7 @@ async function pagination(){
     const data= await response.json();
 
     const postsperpage=5;
-    const currentpage=1;
+    let currentpage=1;
 
     function renderpage(page){
         const start=(page -1) * postsperpage;
@@ -15,20 +15,26 @@ async function pagination(){
         pageItems.forEach(post => {
             const li=document.createElement("li");
             li.textContent=post.title;
-            list.appendChild();
+            list.appendChild(li);
         });
         document.getElementById("page-info").textContent=`page ${page}of ${Math.ceil(data.length/postsperpage)}`;
         document.getElementById("prev-btn").disabled=page === 1;
-        document.getElementById("next-btn").disabled = page === Math.ceil(data.length / postsperpage);
-
-        document.getElementById("prev-btn").addEventListener("click",()=>{
+        document.getElementById("next-btn").disabled = page === Math.ceil(data.length / postsperpage);   
+    }
+    renderpage(currentpage);
+     document.getElementById("prev-btn").addEventListener("click",()=>{
             if(currentpage > 1){
-                currentpage++;
+                currentpage--;
                 renderpage(currentpage);
             }
         });
         document.getElementById("next-btn").addEventListener("click",()=>{
-            
+            if(currentpage < Math.ceil(data.length / postsperpage)){
+                currentpage++;
+                renderpage(currentpage);
+            }
         })
-    }
+    
 }
+
+pagination();
